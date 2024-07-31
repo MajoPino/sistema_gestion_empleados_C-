@@ -39,7 +39,7 @@ namespace sistema_gestion_empleados.Models;
  Número de identificación: {NumeroIdentificacion}
  Edad del empleado: {Edad} años
  Posición del empleado: {Posicion}
- Salario total del empleado: {bonificacion}
+ Salario del empleado: ${Salario} COP
 --------------------------------------");
         }
     }
