@@ -28,18 +28,19 @@ namespace sistema_gestion_empleados.Models;
 
         private double CalcularBonificacion()
         {
-            double bonificacion = Salario * 0.1;
-            return bonificacion;
+            var Bonificacion = Salario * 0.1;
+            return Bonificacion;
         }
 
         public void MostrarInformacion()
         {
-            Console.WriteLine(@$"
- Nombre del empleado: {Nombre} {Apellido}
- Número de identificación: {NumeroIdentificacion}
- Edad del empleado: {Edad} años
- Posición del empleado: {Posicion}
- Salario del empleado: ${Salario} COP
---------------------------------------");
+            var Bonificacion = CalcularBonificacion();
+            var salario1 = Salario + Bonificacion;
+            string coin = "COP";
+            Console.Write($"¦ {Nombre + " " + Apellido,-20} | ");
+            Console.Write($"   {NumeroIdentificacion,-11} | {Edad} años | ${salario1:N2} ");
+            Console.Write($"{coin,-7} |");
+            Console.WriteLine($" {Posicion,-30}   ¦");
+            Console.WriteLine(@$"¦------------------------------------------------------------------------------------------------------------¦");
         }
     }

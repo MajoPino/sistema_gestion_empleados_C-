@@ -1,6 +1,6 @@
 ﻿using sistema_gestion_empleados.Models;
 
-
+var Empresa = new Empresa("-", "-", "-", 10, "-", 0, "<Riwi/>", "cra #1234");
 
 Empresa.AgregarEmpleado(new Empleado("Carlos", "Rodriguez", "12312739", 44, "Gerente Administrativo", 4200000));
 Empresa.AgregarEmpleado(new Empleado("Sara", "Zuluaga", "12312439", 40, "Contadora", 2000000));
@@ -8,63 +8,82 @@ Empresa.AgregarEmpleado(new Empleado("Pedro", "Gómez", "16312739", 34, "Adminis
 Empresa.AgregarEmpleado(new Empleado("Lina", "Parra", "12382739", 24, "Recursos Humanos", 1800000));
 Empresa.AgregarEmpleado(new Empleado("Sergio", "Salazar", "12377739", 37, "Técnico", 2200000));
 
+void MenuOpciones()
+{
+    Styles.MenuOpciones();
+}
+
 void irMenu()
 {
     Console.Write(@"
-Presione cualquier tecla para volver al menú principal.");
+PRESIONE CUALQUIER TECLA PARA VOLVER AL MENU PRINCIPAL.");
     Console.ReadKey();
     Main();
 }
 
 void AgregarEmpleado()
 {
-    Console.WriteLine("Agregar un nuevo empleado");
+    Styles.EncabezadoAgregarEmpleado();
     Console.Write("Nombre: ");
     string nombre = Console.ReadLine();
+    Styles.Divisor1();
     Console.Write("Apellido: ");
     string apellido = Console.ReadLine();
+    Styles.Divisor1();
     Console.Write("Número de identificación: ");
     string numeroIdentificacion = Console.ReadLine();
+    Styles.Divisor1();
     Console.Write("Edad: ");
     byte edad = Convert.ToByte(Console.ReadLine());
+    Styles.Divisor1();
     Console.Write("Posición: ");
     string posicion = Console.ReadLine();
+    Styles.Divisor1();
     Console.Write("Salario: ");
     double salario = Convert.ToDouble(Console.ReadLine());
+    Styles.Divisor1();
     Empresa.AgregarEmpleado(new Empleado(nombre, apellido, numeroIdentificacion, edad, posicion, salario));
-    Console.WriteLine("Empleado agregado correctamente!");
+    Console.WriteLine("EMPLEADO AGREGADO CORRECTAMENTE!");
     irMenu();
 }
 
 void MostrarTodosLosEmpleados()
 {
+    Styles.EncabezadoMostrarTodosLosEmpleados();
     Empresa.MostrarTodosLosEmpleados();
 }
 
 void BuscarEmpleado()
 {
-    MostrarTodosLosEmpleados();
     Empresa.BuscarEmpleado();
     irMenu();  
 }
 
 void EliminarEmpleado()
 {
-    BuscarEmpleado();
+    MostrarTodosLosEmpleados();
     Empresa.EliminarEmpleado();
+    irMenu();
+}
+
+void ActualizarEmpleado()
+{
+    MostrarTodosLosEmpleados();
+    Empresa.ActualizarEmpleado();
+    irMenu();
+}
+
+void MostrarEmpleadosPorCargo()
+{
+    Empresa.MostrarEmpleadosPorCargo();
     irMenu();
 }
 
 void Main()
 {
     Console.Clear();
-    Console.WriteLine("Menú principal");
-    Console.WriteLine(@$"
-1. Agregar Empleado
-2. Mostrar Todos Los Empleados
-3. Buscar Empleado
-4. Eliminar Empleado
-0. Salir");
+    MenuOpciones();
+    Console.Write("POR FAVOR, INGRESE UNA OPCIÓN: ");
     byte opcion = Convert.ToByte(Console.ReadLine());
     switch (opcion)
     {
@@ -89,9 +108,19 @@ void Main()
         EliminarEmpleado();
         break;
 
+        case 5:
+        Console.Clear();
+        ActualizarEmpleado();
+        break;
+
+        case 6:
+        Console.Clear();
+        MostrarEmpleadosPorCargo();
+        break;
+
         case 0:
         Console.Clear();
-        Console.WriteLine("Gracias por usar el sistema de gestión de empleados!");
+        Console.WriteLine("GRACIAS POR USAR EL SISTEMA DE GESTIÓN DE EMPLEADOS!");
         Environment.Exit(0);
         break;
 

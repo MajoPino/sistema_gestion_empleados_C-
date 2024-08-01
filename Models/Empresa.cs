@@ -7,8 +7,8 @@ namespace sistema_gestion_empleados.Models;
 
 public class Empresa : Empleado
 {
-    public string NombreEmpresa { get; set; }
-    public string Direccion { get; set; }
+    public static string NombreEmpresa { get; set; }
+    public static string Direccion { get; set; }
     public static List<Empleado> ListaEmpleados = new List<Empleado>();
 
     public Empresa(string nombre, string apellido, string numeroIdentificacion, byte edad, string posicion, double salario, string nombreEmpresa, string direccion) : base(nombre, apellido, numeroIdentificacion, edad, posicion, salario)
@@ -24,12 +24,27 @@ public class Empresa : Empleado
 
     public static void EliminarEmpleado()
     {
-        var empleado = BuscarEmpleado();
+        Console.Write(@$"
+POR FAVOR, INGRESE EL NOMBRE DEL EMPLEADO A ELIMINAR: ");
+        string nombre = Console.ReadLine();
+        Console.Write(@$"
+
+POR FAVOR, INGRESE EL APELLIDO DEL EMPLEADO A ELIMINAR: ");
+        string apellido = Console.ReadLine();
+        Empleado empleado = ListaEmpleados.FirstOrDefault(e => e.Nombre == nombre && e.Apellido == apellido);
 
         if (empleado != null)
         {
             ListaEmpleados.Remove(empleado);
-            Console.WriteLine("Empleado eliminado correctamente!");
+            Console.WriteLine(@$"
+------------------------------------------------------------------------------------------------");
+            Console.WriteLine("EMPLEADO ELIMINADO CORRECTAMENTE!");
+        }
+        else
+        {
+            Console.WriteLine(@$"
+------------------------------------------------------------------------------------------------");
+            Console.WriteLine(@$"NO SE ENCONTRÓ EL EMPLEADO, POR FAVOR VERIFIQUE LA INFORMACIÓN E INTENTE DE NUEVO.");
         }
     }
 
@@ -43,50 +58,95 @@ public class Empresa : Empleado
 
     public static void ActualizarEmpleado()
     {
-        var empleado = BuscarEmpleado();
-
-        if (empleado != null)
-        {
-            Console.Write("Nombre: ");
-            string Nombre = Console.ReadLine();
-            Console.Write("Apellido: ");
-            string Apellido = Console.ReadLine();
-            Console.Write("Edad: ");
-            byte Edad = Convert.ToByte(Console.ReadLine());
-            Console.Write("Posición: ");
-            string Posicion = Console.ReadLine();
-            Console.Write("Salario: ");
-            double Salario = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Empleado actualizado correctamente!");
-        }
-    }
-
-    public static Empleado BuscarEmpleado()
-    {
-        Console.Write("Ingrese el número de identificación del empleado a buscar: ");
+        Console.Write("INGRESE EL NÚMERO DE IDENTIFICACIÓN DEL EMPLEADO A ACTUALIZAR: ");
         string numeroIdentificacion = Console.ReadLine();
         var empleado = ListaEmpleados.FirstOrDefault(e => e.NumeroIdentificacion == numeroIdentificacion);
         if (empleado != null)
         {
+            Console.Clear();
+            Console.WriteLine(@$"
+----------------------------------------------------------------
+|                       EDITAR EMPLEADO                        |
+----------------------------------------------------------------");
+            Console.Write("Nuevo Nombre: ");
+            string Nombre = Console.ReadLine();
+            empleado.Nombre = Nombre;
+            Console.WriteLine(@$"----------------------------------------------------------------");
+            Console.Write("Nuevo Apellido: ");
+            string Apellido = Console.ReadLine();
+            empleado.Apellido = Apellido;
+            Console.WriteLine(@$"----------------------------------------------------------------");
+            Console.Write("Nueva Edad: ");
+            byte Edad = Convert.ToByte(Console.ReadLine());
+            empleado.Edad = Edad;
+            Console.WriteLine(@$"----------------------------------------------------------------");
+            Console.Write("Nueva Posición: ");
+            string Posicion = Console.ReadLine();
+            empleado.Posicion = Posicion;
+            Console.WriteLine(@$"----------------------------------------------------------------");
+            Console.Write("Nuevo Salario: ");
+            double Salario = Convert.ToDouble(Console.ReadLine());
+            empleado.Salario = Salario;
+            Console.WriteLine(@$"----------------------------------------------------------------");
+            Console.WriteLine("EMPLEADO ACTUALIZADO CORRECTAMENTE!");
+        }
+        else
+        {
+            Console.WriteLine(@$"
+------------------------------------------------------------------------------------------------");
+            Console.WriteLine(@$"NO SE ENCONTRÓ EL EMPLEADO, POR FAVOR VERIFIQUE LA INFORMACIÓN E INTENTE DE NUEVO.");
+        }
+    }
+
+    public static void BuscarEmpleado()
+    {
+        Console.Write("POR FAVOR, INGRESE EL NÚMERO DE IDENTIFICACIÓN DEL EMPLEADO A BUSCAR: ");
+        string numeroIdentificacion = Console.ReadLine();
+        var empleado = ListaEmpleados.FirstOrDefault(e => e.NumeroIdentificacion == numeroIdentificacion);
+        if (empleado != null)
+        {
+            Console.WriteLine(@$"
+--------------------------------------------------------------------------------------------------------------
+|                                            DATOS DEL EMPLEADO                                              |
+--------------------------------------------------------------------------------------------------------------
+¦ NOMBRE COMPLETO      |  N° DOCUMENTO  |  EDAD   | SALARIO               | POSICIÓN                         ¦
+..............................................................................................................");
             empleado.MostrarInformacion();
         }
         else
         {
-            Console.WriteLine("No se encontró el empleado, por favor intente de nuevo.");
+            Console.WriteLine(@$"
+------------------------------------------------------------------------------------------------");
+            Console.WriteLine(@$"NO SE ENCONTRÓ EL EMPLEADO, POR FAVOR VERIFIQUE LA INFORMACIÓN E INTENTE DE NUEVO.");
         }
 
-        return empleado;
     }
     public static void MostrarEmpleadosPorCargo()
     {
-        Console.Write("Ingrese la posición del empleado a buscar: ");
+        Console.Write("INGRESE LA POSICIÓN DEL EMPLEADO A BUSCAR: ");
         string posicion = Console.ReadLine();
         var empleados = ListaEmpleados.Where(e => e.Posicion == posicion).ToList();
 
-        Console.WriteLine("Empleados con la posición " + posicion + ":");
+        string posicionUppercase = posicion.ToUpper();
+
+        if (empleados.Count == 0)
+        {
+            Console.WriteLine(@$"
+------------------------------------------------------------------------------------------------");
+            Console.WriteLine(@$"NO SE ENCONTRÓ NINGÚN EMPLEADO CON LA POSICIÓN {posicionUppercase}. POR FAVOR, VERIFIQUE LA INFORMACIÓN E INTENTE DE NUEVO.");
+        }
+        else
+        {
+            Console.WriteLine(@$"
+--------------------------------------------------------------------------------------------------------------
+|                                         EMPLEADOS DE LA EMPRESA                                            |
+--------------------------------------------------------------------------------------------------------------
+¦ NOMBRE COMPLETO      |  N° DOCUMENTO  |  EDAD   | SALARIO               | POSICIÓN                         ¦
+..............................................................................................................");
         foreach (var empleado in empleados)
         {
             empleado.MostrarInformacion();
+        }
         }
     }
 }
