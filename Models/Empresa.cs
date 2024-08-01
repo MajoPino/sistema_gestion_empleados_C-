@@ -10,11 +10,44 @@ public class Empresa : Empleado
     public static string NombreEmpresa { get; set; }
     public static string Direccion { get; set; }
     public static List<Empleado> ListaEmpleados = new List<Empleado>();
+    public static List<Cliente> ListaClientes = new List<Cliente>();
 
     public Empresa(string nombre, string apellido, int edad, string numeroIdentificacion, string posicion, double salario, string nombreEmpresa, string direccion) : base(nombre, apellido, edad, numeroIdentificacion, posicion, salario)
     {
         NombreEmpresa = nombreEmpresa.Trim();
         Direccion = direccion.Trim();
+    }
+
+    public static void AgregarCliente(Cliente cliente)
+    {
+        ListaClientes.Add(cliente);
+    }
+
+    public static void EliminarCliente()
+    {
+        Console.Write("POR FAVOR, INGRESE EL EMAIL DEL CLIENTE A ELIMINAR: ");
+        string email = Console.ReadLine().ToLower();
+        Cliente cliente = ListaClientes.FirstOrDefault(c => c.Email == email);
+
+        if (cliente!= null)
+        {
+            ListaClientes.Remove(cliente);
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("CLIENTE ELIMINADO CORRECTAMENTE!");
+        }
+        else
+        {
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------");
+            Console.WriteLine("NO SE ENCONTRÓ EL CLIENTE, POR FAVOR VERIFIQUE LA INFORMACIÓN E INTENTE DE NUEVO.");
+        }
+    }
+    public static void MostrarTodosLosClientes()
+    {
+        foreach (Cliente cliente in ListaClientes)
+        {
+            cliente.MostrarInformacion();
+        }
+        Console.WriteLine("--------------------------------------------------------------------------------------------------------------");
     }
 
     public static void AgregarEmpleado(Empleado empleado)

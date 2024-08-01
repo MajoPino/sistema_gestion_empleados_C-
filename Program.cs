@@ -6,6 +6,12 @@ Empresa.AgregarEmpleado(new Empleado("Pedro", "Gómez", 34, "16312739", "Adminis
 Empresa.AgregarEmpleado(new Empleado("Lina", "Parra", 24, "12382739", "Recursos Humanos", 1800000));
 Empresa.AgregarEmpleado(new Empleado("Sergio", "Salazar", 37, "12377739", "Técnico", 2200000));
 
+Empresa.AgregarCliente(new Cliente("Leo", "Torres", 22, "leotorres@gmail.com", "3242637842"));
+Empresa.AgregarCliente(new Cliente("Juana", "Cardona", 23, "juanacar22@gmail.com", "3242633844"));
+Empresa.AgregarCliente(new Cliente("Santiago", "Iglesias", 19, "santiiglesias@gmail.com", "3242637942"));
+Empresa.AgregarCliente(new Cliente("Fernando", "López", 45, "fercho@gmail.com", "3242137842"));
+Empresa.AgregarCliente(new Cliente("Catalina", "Medina", 30, "catalinamed@gmail.com", "3242557845"));
+
 void MenuOpciones()
 {
     Styles.MenuOpciones();
@@ -17,6 +23,29 @@ void irMenu()
 PRESIONE CUALQUIER TECLA PARA VOLVER AL MENU PRINCIPAL.");
     Console.ReadKey();
     Main();
+}
+
+void AgregarCliente()
+{
+    Styles.EncabezadoAgregarCliente();
+    Console.Write("Nombre del cliente: ");
+    string nombre = Console.ReadLine();
+    Styles.Divisor1();
+    Console.Write("Apellido del cliente: ");
+    string apellido = Console.ReadLine();
+    Styles.Divisor1();
+    Console.Write("Edad del cliente: ");
+    int edad = Convert.ToInt32(Console.ReadLine());
+    Styles.Divisor1();
+    Console.Write("Email del cliente: ");
+    string email = Console.ReadLine();
+    Styles.Divisor1();
+    Console.Write("Número telefónico del cliente: ");
+    string telefono = Console.ReadLine();
+    Styles.Divisor1();
+    Empresa.AgregarCliente(new Cliente(nombre, apellido, edad, email, telefono));
+    Console.WriteLine("CLIENTE AGREGADO CORRECTAMENTE!");
+    irMenu();
 }
 
 void AgregarEmpleado()
@@ -32,7 +61,7 @@ void AgregarEmpleado()
     string numeroIdentificacion = Console.ReadLine();
     Styles.Divisor1();
     Console.Write("Edad: ");
-    byte edad = Convert.ToByte(Console.ReadLine());
+    int edad = Convert.ToInt32(Console.ReadLine());
     Styles.Divisor1();
     Console.Write("Posición: ");
     string posicion = Console.ReadLine();
@@ -45,6 +74,12 @@ void AgregarEmpleado()
     irMenu();
 }
 
+void MostrarTodosLosClientes()
+{
+    Styles.EncabezadoMostrarTodosLosClientes();
+    Empresa.MostrarTodosLosClientes();
+}
+
 void MostrarTodosLosEmpleados()
 {
     Styles.EncabezadoMostrarTodosLosEmpleados();
@@ -55,6 +90,13 @@ void BuscarEmpleado()
 {
     Empresa.BuscarEmpleado();
     irMenu();  
+}
+
+void EliminarCliente()
+{
+    MostrarTodosLosClientes();
+    Empresa.EliminarCliente();
+    irMenu();
 }
 
 void EliminarEmpleado()
@@ -114,6 +156,22 @@ void Main()
         case 6:
         Console.Clear();
         MostrarEmpleadosPorCargo();
+        break;
+        
+        case 7:
+        Console.Clear();
+        AgregarCliente();
+        break;
+
+        case 8:
+        Console.Clear();
+        MostrarTodosLosClientes();
+        irMenu();
+        break;
+        
+        case 9:
+        Console.Clear();
+        EliminarCliente();
         break;
 
         case 0:

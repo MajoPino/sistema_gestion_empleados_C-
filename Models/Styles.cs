@@ -21,6 +21,9 @@ namespace sistema_gestion_empleados.Models;
 ¦ 4. ELIMINAR EMPLEADO                                         ¦
 ¦ 5. ACTUALIZAR EMPLEADO                                       ¦
 ¦ 6. MOSTRAR EMPLEADOS POR CARGO                               ¦
+¦ 7. AGREGAR CLIENTE                                           ¦
+¦ 8. MOSTRAR TODOS LOS CLIENTES                                ¦
+¦ 9. ELIMINAR CLIENTE                                          ¦
 ¦ 0. SALIR                                                     ¦
 ................................................................");
         }
@@ -30,6 +33,14 @@ namespace sistema_gestion_empleados.Models;
             Console.WriteLine(@$"
 ----------------------------------------------------------------
 |              AGREGAR NUEVO EMPLEADO A LA EMPRESA             |
+----------------------------------------------------------------");
+        }
+
+        public static void EncabezadoAgregarCliente()
+        {
+            Console.WriteLine(@$"
+----------------------------------------------------------------
+|              AGREGAR NUEVO CLIENTE DE LA EMPRESA             |
 ----------------------------------------------------------------");
         }
 
@@ -46,6 +57,16 @@ namespace sistema_gestion_empleados.Models;
 --------------------------------------------------------------------------------------------------------------
 ¦ NOMBRE COMPLETO      |  N° DOCUMENTO  |  EDAD   | SALARIO               | POSICIÓN                         ¦
 ..............................................................................................................");
+        }
+
+        public static void EncabezadoMostrarTodosLosClientes()
+        {
+            Console.WriteLine(@$"
+-------------------------------------------------------------------------------------------
+|                                CLIENTES DE LA EMPRESA                                   |
+-------------------------------------------------------------------------------------------
+¦ NOMBRE COMPLETO      |  EDAD    | TELEFONO   | EMAIL                                    ¦
+...........................................................................................");
         }
 
     }
