@@ -48,7 +48,4 @@ namespace sistema_gestion_empleados.Models;
 ..............................................................................................................");
         }
 
-        public static void Divisor2()
-        {
-        }
     }
