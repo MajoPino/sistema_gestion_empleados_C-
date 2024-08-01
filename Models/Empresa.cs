@@ -11,7 +11,7 @@ public class Empresa : Empleado
     public static string Direccion { get; set; }
     public static List<Empleado> ListaEmpleados = new List<Empleado>();
 
-    public Empresa(string nombre, string apellido, string numeroIdentificacion, byte edad, string posicion, double salario, string nombreEmpresa, string direccion) : base(nombre, apellido, numeroIdentificacion, edad, posicion, salario)
+    public Empresa(string nombre, string apellido, int edad, string numeroIdentificacion, string posicion, double salario, string nombreEmpresa, string direccion) : base(nombre, apellido, edad, numeroIdentificacion, posicion, salario)
     {
         NombreEmpresa = nombreEmpresa.Trim();
         Direccion = direccion.Trim();
@@ -77,7 +77,7 @@ POR FAVOR, INGRESE EL APELLIDO DEL EMPLEADO A ELIMINAR: ");
             empleado.Apellido = Apellido;
             Console.WriteLine(@$"----------------------------------------------------------------");
             Console.Write("Nueva Edad: ");
-            byte Edad = Convert.ToByte(Console.ReadLine());
+            int Edad = Convert.ToInt32(Console.ReadLine());
             empleado.Edad = Edad;
             Console.WriteLine(@$"----------------------------------------------------------------");
             Console.Write("Nueva Posición: ");

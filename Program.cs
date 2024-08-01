@@ -1,12 +1,10 @@
 ﻿using sistema_gestion_empleados.Models;
 
-var Empresa = new Empresa("-", "-", "-", 10, "-", 0, "<Riwi/>", "cra #1234");
-
-Empresa.AgregarEmpleado(new Empleado("Carlos", "Rodriguez", "12312739", 44, "Gerente Administrativo", 4200000));
-Empresa.AgregarEmpleado(new Empleado("Sara", "Zuluaga", "12312439", 40, "Contadora", 2000000));
-Empresa.AgregarEmpleado(new Empleado("Pedro", "Gómez", "16312739", 34, "Administrador de base de datos", 3400000));
-Empresa.AgregarEmpleado(new Empleado("Lina", "Parra", "12382739", 24, "Recursos Humanos", 1800000));
-Empresa.AgregarEmpleado(new Empleado("Sergio", "Salazar", "12377739", 37, "Técnico", 2200000));
+Empresa.AgregarEmpleado(new Empleado("Carlos", "Rodriguez", 44, "12312739", "Gerente Administrativo", 4200000));
+Empresa.AgregarEmpleado(new Empleado("Sara", "Zuluaga", 40, "12312439", "Contadora", 2000000));
+Empresa.AgregarEmpleado(new Empleado("Pedro", "Gómez", 34, "16312739", "Administrador de base de datos", 3400000));
+Empresa.AgregarEmpleado(new Empleado("Lina", "Parra", 24, "12382739", "Recursos Humanos", 1800000));
+Empresa.AgregarEmpleado(new Empleado("Sergio", "Salazar", 37, "12377739", "Técnico", 2200000));
 
 void MenuOpciones()
 {
@@ -42,7 +40,7 @@ void AgregarEmpleado()
     Console.Write("Salario: ");
     double salario = Convert.ToDouble(Console.ReadLine());
     Styles.Divisor1();
-    Empresa.AgregarEmpleado(new Empleado(nombre, apellido, numeroIdentificacion, edad, posicion, salario));
+    Empresa.AgregarEmpleado(new Empleado(nombre, apellido, edad, numeroIdentificacion, posicion, salario));
     Console.WriteLine("EMPLEADO AGREGADO CORRECTAMENTE!");
     irMenu();
 }

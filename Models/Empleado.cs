@@ -5,23 +5,20 @@ using System.Threading.Tasks;
 
 namespace sistema_gestion_empleados.Models;
 
-    public class Empleado
+    public class Empleado : Persona
     {
+        public override string Nombre { get; set; }
+        public override string Apellido { get; set; }
+        public override int Edad { get; set; }
         public Guid Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
         public string NumeroIdentificacion { get; set; }
-        public byte Edad { get; set; }
         public string Posicion { get; set; }
         public double Salario { get; set; }
 
-        public Empleado(string nombre, string apellido, string numeroIdentificacion, byte edad, string posicion, double salario) 
+        public Empleado(string nombre, string apellido, int edad, string numeroIdentificacion, string posicion, double salario) : base (nombre, apellido, edad)
         {
             Id = new Guid();
-            Nombre = nombre;
-            Apellido = apellido;
             NumeroIdentificacion = numeroIdentificacion;
-            Edad = edad;
             Posicion = posicion;
             Salario = salario;
         }
@@ -32,7 +29,7 @@ namespace sistema_gestion_empleados.Models;
             return Bonificacion;
         }
 
-        public void MostrarInformacion()
+        public override void MostrarInformacion()
         {
             var Bonificacion = CalcularBonificacion();
             var salario1 = Salario + Bonificacion;
